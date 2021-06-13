@@ -40,7 +40,7 @@ const fetchStatus = async () => {
     var queryParams =
       "?" +
       encodeURIComponent("ServiceKey") +
-      "=HfqivhIZ0LdSWOWJuO6cYiOUrrrTGDG0yB22Wsc6pbmvUOfwIuIzUOqnv9ZK6Ppvw2mHnFk%2Bf2yNllDWnCrfRw%3D%3D";
+      `=${process.env.COVID19_CITY_OPEN_API}`;
     queryParams +=
       "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1");
     queryParams +=
@@ -90,9 +90,7 @@ const fetchStatus = async () => {
       "&" +
       encodeURIComponent("serviceKey") +
       "=" +
-      encodeURIComponent(
-        "HfqivhIZ0LdSWOWJuO6cYiOUrrrTGDG0yB22Wsc6pbmvUOfwIuIzUOqnv9ZK6Ppvw2mHnFk+f2yNllDWnCrfRw=="
-      );
+      encodeURIComponent(process.env.COVID19_VACCINE_OPEN_API);
     let responseVaccine = await axios.get(url + queryParams);
     responseVaccine = responseVaccine.data.data;
 

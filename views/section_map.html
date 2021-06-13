@@ -1,0 +1,220 @@
+<div class="col-xl-7 col-lg-6">
+  <!-- Illustrations -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary d-inline-block">지도</h6>
+      <div id="mapController" class="ml-3 d-inline-block">
+        <div
+          class="
+            custom-control custom-switch
+            ml-3
+            px-3
+            d-inline-block
+            border-right
+          "
+        >
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="mapInterectionBtn"
+          />
+          <label class="custom-control-label" for="mapInterectionBtn"
+            >지도 조작</label
+          >
+        </div>
+        <button
+          type="button"
+          class="btn btn-info ml-3 d-inline-block btn-sm"
+          id="centerBtn"
+        >
+          중앙으로 이동
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="map" style="width: 100%; height: 400px"></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  let POPULATION_DENSE;
+  var map = null;
+  const defaultZoom = 10;
+  let JEJU_CENTER = new naver.maps.LatLng(
+    33.37607921112749,
+    126.52889280288728
+  );
+  map = new naver.maps.Map("map", {
+    center: JEJU_CENTER,
+    zoom: defaultZoom,
+  });
+  let json;
+  let circles = [];
+  naver.maps.onJSContentLoaded = drawCircle;
+  async function drawCircle() {
+    let datas = await getPopulationDense();
+    let thList = "";
+    datas.forEach((data) => {
+      thList += `<tr class="populationListEle">
+          <th scope="row">${data.rank}</th>
+          <td>${data.city}</td>
+          <td>${data.town}</td>
+          <td>${data.category}</td>
+          <td>${data.latitude}</td>
+          <td>${data.longitude}</td>
+        </tr>`;
+      circles.push(
+        new naver.maps.Circle({
+          map: map,
+          center: new naver.maps.LatLng(data.latitude, data.longitude),
+          radius: 1700,
+          strokeColor: "red",
+          fillColor: "red",
+          fillOpacity: 0.5 / (data.rank * 0.9) + 0.08,
+          clickable: true,
+          rank: data.rank,
+        })
+      );
+    });
+    let $tableBody = document.getElementById("populationTableBody");
+    $tableBody.innerHTML = thList;
+    circles.forEach((circle) => addCircleEvent(circle));
+  }
+
+  let setInterect = () => {
+    map.setOptions({
+      //지도 인터랙션 켜기
+      draggable: true,
+      pinchZoom: true,
+      scrollWheel: true,
+      keyboardShortcuts: true,
+      disableDoubleTapZoom: false,
+      disableDoubleClickZoom: false,
+      disableTwoFingerTapZoom: false,
+    });
+  };
+  let setNoInterect = () => {
+    map.setOptions({
+      //지도 인터랙션 끄기
+      draggable: false,
+      pinchZoom: false,
+      scrollWheel: false,
+      keyboardShortcuts: false,
+      disableDoubleTapZoom: true,
+      disableDoubleClickZoom: true,
+      disableTwoFingerTapZoom: true,
+    });
+  };
+  setNoInterect();
+  let $mapInterectionBtn = document.getElementById("mapInterectionBtn");
+  $mapInterectionBtn.addEventListener("change", function (e) {
+    e.preventDefault();
+    if (!this.checked && map.getOptions("draggable")) {
+      setNoInterect();
+    } else {
+      setInterect();
+    }
+  });
+
+  let $list = document.getElementById("populationList");
+  let locateInfoList = $list.getElementsByClassName("populationListEle");
+  function activeLocate(rank, circle) {
+    circle.setOptions({
+      strokeColor: "blue",
+      strokeWeight: 3,
+    });
+    locateInfoList[rank - 1].classList.add("active");
+  }
+  function passiveLocate(rank, circle) {
+    circle.setOptions({
+      strokeColor: "red",
+      strokeWeight: 1,
+    });
+    locateInfoList[rank - 1].classList.remove("active");
+  }
+
+  let $centerBtn = document.getElementById("centerBtn");
+  $centerBtn.addEventListener("click", (e) => {
+    map.setOptions({
+      center: JEJU_CENTER,
+      zoom: defaultZoom,
+    });
+  });
+  //위치원 이벤트-----
+  function addCircleEvent(circle) {
+    naver.maps.Event.addListener(circle, "mouseover", function (e) {
+      activeLocate(circle.rank, circle);
+    });
+    locateInfoList[circle.rank - 1].addEventListener("mouseover", (e) => {
+      activeLocate(circle.rank, circle);
+    });
+    naver.maps.Event.addListener(circle, "mouseout", function (e) {
+      passiveLocate(circle.rank, circle);
+    });
+    locateInfoList[circle.rank - 1].addEventListener("mouseout", (e) => {
+      passiveLocate(circle.rank, circle);
+    });
+    const clickListener = (e) => {
+      if (
+        Math.floor(map.getOptions("center").y * 10000) / 10000 ===
+          Math.floor(circle.center.y * 10000) / 10000 &&
+        map.getOptions("zoom") === defaultZoom + 3
+      ) {
+        map.setOptions({
+          center: JEJU_CENTER,
+          zoom: defaultZoom,
+        });
+      } else {
+        map.setOptions({
+          center: circle.center,
+          zoom: defaultZoom + 3,
+        });
+      }
+    };
+    locateInfoList[circle.rank - 1].addEventListener("click", clickListener);
+    naver.maps.Event.addListener(circle, "click", clickListener);
+  }
+  //END-------------
+  let tagOffsetTop = {
+    Covid19Status: {
+      node: document.getElementById("Covid19StatusTag"),
+      pos: document.getElementById("Covid19Status").offsetTop,
+      current: true,
+    },
+    Chart: {
+      node: document.getElementById("ChartTag"),
+      pos: document.getElementById("Chart").offsetTop,
+      current: false,
+    },
+    Population: {
+      node: document.getElementById("PopulationTag"),
+      pos: document.getElementById("Population").offsetTop,
+      current: false,
+    },
+  };
+  function getNearTag(tagOffsetTop) {
+    let min = 10000;
+    for (let key in tagOffsetTop) {
+      if (min > tagOffsetTop[key].pos - window.scrollY - 70) {
+        min = tagOffsetTop[key].pos;
+        minNode = tagOffsetTop[key].node;
+        minNode.style.fontWeight = "bold";
+      } else tagOffsetTop[key].node.style.fontWeight = "normal";
+    }
+  }
+
+  window.addEventListener("scroll", () => {
+    getNearTag(tagOffsetTop);
+  });
+  getNearTag(tagOffsetTop);
+
+  async function getPopulationDense() {
+    if (POPULATION_DENSE) return POPULATION_DENSE;
+    else {
+      let res = await fetch("/api/dense");
+      res = await res.json();
+      POPULATION_DENSE = res.datas;
+      return POPULATION_DENSE;
+    }
+  }
+</script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Jeju Forecaster</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="all.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=q2e89ptrxu"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=q2e89ptrxu&submodules=visualization"
+    ></script>
+    <!-- Custom styles for this template-->
+    <link href="sb-admin-2.min.css" rel="stylesheet" />
+    <link href="add.private.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="
+              navbar navbar-expand navbar-light
+              bg-white
+              topbar
+              mb-4
+              fixed-top
+              shadow
+            "
+          >
+            <h1 class="h5 mb-0 ml-2 mr-3 text-gray-800">Jeju Forecaster</h1>
+            <ul id="tagBar">
+              <li id="Covid19StatusTag">
+                <a href="#Covid19Status">코로나 현황</a>
+              </li>
+              <li id="ChartTag"><a href="#Chart">입도자 수</a></li>
+              <li id="PopulationTag"><a href="#Population">인구 밀집</a></li>
+            </ul>
+
+            <!-- Topbar Search -->
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div id="Covid19Status" class="Shap"></div>
+          <div class="container-fluid" style="padding-top: 95px">
+            <!-- Page Heading -->
+            <div
+              class="d-sm-flex align-items-center justify-content-between mb-4"
+            >
+              <h1 class="h5 mb-0 text-gray-800">코로나 현황</h1>
+              <span class="updateText ml-3" id="statusUpdateText"
+                >(update :2020/00/00 | 2020/00/00)</span
+              >
+            </div>
+            <!-- Content Row -->
+            {% include "section_status.html" %}
+
+            <!-- Content Row -->
+            <div id="Chart" class="Shap"></div>
+            <div
+              class="
+                d-sm-flex
+                align-items-center
+                justify-content-between
+                mb-4
+                my-3
+              "
+            >
+              <h1 class="h5 mb-0 text-gray-800">입도자 수</h1>
+            </div>
+            <div class="row">
+              {% include "section_straight.html" %} {% include
+              "section_dot.html" %}
+            </div>
+
+            <!-- Content Row -->
+            <div id="Population" class="Shap"></div>
+            <div
+              class="d-sm-flex align-items-center justify-content-between mb-4"
+            >
+              <h1 class="h5 mb-0 text-gray-800">인구 밀집</h1>
+              <!-- <span class="updateText ml-3">(update :2020/00/00)</span> -->
+            </div>
+            <div class="row">
+              {% include "section_list.html" %} {% include "section_map.html" %}
+            </div>
+            <div class="row">{% include "section_pie.html" %}</div>
+          </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2021</span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    {% include "script.html" %}
+  </body>
+</html>

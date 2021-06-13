@@ -1,0 +1,259 @@
+<div class="row">
+  <!-- Card  -->
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-danger shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="status-text" style="display: inline-block">
+              <div
+                class="text-xs font-weight-bold text-danger text-uppercase mb-1"
+              >
+                확진자 수
+              </div>
+              <div
+                id="defCntResult"
+                class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+              >
+                {{status.occur.defCnt}}
+              </div>
+              <p
+                id="defCntIncrease"
+                class="increase-text ml-3"
+                style="margin: 0"
+              >
+                -
+              </p>
+            </div>
+            <div style="height: 45px; width: 50%; float: right">
+              <canvas id="defCntChart" style="display: inline-block"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+            >
+              발생
+            </div>
+            <div
+              id="localOccCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.occur.localOccCnt}}
+            </div>
+            <p
+              id="localOccCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas
+              id="localOccCntChart"
+              style="display: inline-block"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              격리해제
+            </div>
+            <div
+              id="isolClearCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.occur.isolClearCnt}}
+            </div>
+            <p
+              id="isolClearCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas
+              id="isolClearCntChart"
+              style="display: inline-block"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-dark shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+              사망
+            </div>
+            <div
+              id="deathCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.occur.deathCnt}}
+            </div>
+            <p
+              id="deathCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas id="deathCntChart" style="display: inline-block"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-success text-uppercase mb-1"
+            >
+              당일 1차 접종
+            </div>
+            <div
+              id="firstCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.vaccine.firstCnt}}
+            </div>
+            <p
+              id="firstCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas id="firstCntChart" style="display: inline-block"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-success text-uppercase mb-1"
+            >
+              당일 2차 접종
+            </div>
+            <div
+              id="secondCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.vaccine.secondCnt}}
+            </div>
+            <p
+              id="secondCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas id="secondCntChart" style="display: inline-block"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-info shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+              접종자수
+            </div>
+            <div
+              id="totalFirstCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.vaccine.totalFirstCnt}}
+            </div>
+            <p
+              id="totalFirstCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas
+              id="totalFirstCntChart"
+              style="display: inline-block"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-2 mb-2">
+    <div class="card border-left-info shadow h-100 py-2">
+      <div class="card-body card-status">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+              접종 2차
+            </div>
+            <div
+              id="totalSecondCntResult"
+              class="h5 mb-0 font-weight-bold text-gray-800 current-text"
+            >
+              {{status.vaccine.totalSecondCnt}}
+            </div>
+            <p
+              id="totalSecondCntIncrease"
+              class="increase-text ml-3"
+              style="margin: 0"
+            >
+              -
+            </p>
+          </div>
+          <div style="height: 45px; width: 50%; float: right">
+            <canvas
+              id="totalSecondCntChart"
+              style="display: inline-block"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

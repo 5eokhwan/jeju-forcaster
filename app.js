@@ -3,8 +3,8 @@ const path = require("path");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const nunjucks = require("nunjucks");
-dotenv.config();
 const indexRouter = require("./routes");
+dotenv.config();
 
 const app = express();
 app.set("port", process.env.PORT || 3000);

@@ -15,10 +15,8 @@ const $filterUsableInstitution = document.querySelector(
 );
 
 $filterUsableInstitution.addEventListener("change", (e) => {
-  console.log("?");
   if (e.target.checked)
     all_circles.forEach((circle) => {
-      console.log(circle.usable);
       if (circle.filter === "institution" && !circle.usable)
         circle.setVisible(false);
     });
@@ -79,12 +77,15 @@ let filterCheckListener = (e, el = null) => {
   if (!el) el = e.target;
   all_circles.forEach((circle) => {
     if (circle.filter === el.dataset.filter) {
-      circle.setVisible(el.checked ? true : false);
+      if (el.checked) circle.setVisible(true);
+      else circle.setVisible(false);
     }
   });
   if (el.dataset.filter === "institution") {
-    $filterUsableInstitution.style.display = el.checked ? "" : "none";
-    $filterUsableInstitution.childNodes[1].checked = el.checked ? false : true;
+    if (el.checked) {
+      $filterUsableInstitution.style.display = "";
+      $filterUsableInstitution.childNodes[1].checked = false;
+    } else $filterUsableInstitution.style.display = "none";
   }
 };
 
@@ -287,19 +288,28 @@ let heroCenterBtn = document.getElementById("hero-Center-Btn");
 let heroInstitutionBtn = document.getElementById("hero-Institution-Btn");
 
 heroDenseBtn.addEventListener("click", () => {
-  filterCheckBoxes.forEach((box) => (box.checked = false));
+  filterCheckBoxes.forEach((box) => {
+    box.checked = false;
+    filterCheckListener(null, box);
+  });
   filterCheckBoxes[0].checked = true;
   selectFilter(null, filterBtns[1]);
   filterCheckListener(null, filterCheckBoxes[0]);
 });
 heroCenterBtn.addEventListener("click", () => {
-  filterCheckBoxes.forEach((box) => (box.checked = false));
+  filterCheckBoxes.forEach((box) => {
+    box.checked = false;
+    filterCheckListener(null, box);
+  });
   filterCheckBoxes[1].checked = true;
   selectFilter(null, filterBtns[2]);
   filterCheckListener(null, filterCheckBoxes[1]);
 });
 heroInstitutionBtn.addEventListener("click", () => {
-  filterCheckBoxes.forEach((box) => (box.checked = false));
+  filterCheckBoxes.forEach((box) => {
+    box.checked = false;
+    filterCheckListener(null, box);
+  });
   filterCheckBoxes[2].checked = true;
   selectFilter(null, filterBtns[3]);
   filterCheckListener(null, filterCheckBoxes[2]);

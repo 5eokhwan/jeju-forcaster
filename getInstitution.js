@@ -26,7 +26,6 @@ const fetchInstitution = async () => {
     let currentHm =
       `${numberPad(date.getHours(), 2)}` + numberPad(date.getMinutes(), 2);
     institution.currentHm = currentHm;
-    currentHm = 1339;
     data = fetchedData.data.data;
     for (let key in parsedData) {
       const findedObj = data.find((obj) => obj.orgnm === key);

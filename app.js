@@ -28,6 +28,8 @@ app.use("/", express.static(path.join(__dirname, "public/src/stylesheets")));
 app.use("/", express.static(path.join(__dirname, "public/src/webfonts")));
 app.use("/", express.static(path.join(__dirname, "public")));
 
+app.use("/", express.static(path.join(__dirname, "assets")));
+
 app.use("/", indexRouter);
 
 app.use((req, res, next) => {

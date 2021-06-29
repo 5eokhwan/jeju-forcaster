@@ -50,6 +50,7 @@
   });
   let json;
   let circles = [];
+  let centers = [];
   naver.maps.onJSContentLoaded = drawCircle;
   async function drawCircle() {
     let datas = await getPopulationDense();
@@ -79,6 +80,7 @@
     let $tableBody = document.getElementById("populationTableBody");
     $tableBody.innerHTML = thList;
     circles.forEach((circle) => addCircleEvent(circle));
+    await drawCenter();
   }
 
   let setInterect = () => {
@@ -175,6 +177,23 @@
     naver.maps.Event.addListener(circle, "click", clickListener);
   }
   //END-------------
+  async function drawCenter() {
+    let datas = await getCenter();
+    datas.forEach((data) => {
+      centers.push(
+        new naver.maps.Circle({
+          map: map,
+          center: new naver.maps.LatLng(data.lat, data.lng),
+          radius: 1700,
+          strokeColor: "blue",
+          fillColor: "blue",
+          fillOpacity: 0.5,
+          clickable: true,
+        })
+      );
+    });
+  }
+
   let tagOffsetTop = {
     Covid19Status: {
       node: document.getElementById("Covid19StatusTag"),
@@ -216,5 +235,13 @@
       POPULATION_DENSE = res.datas;
       return POPULATION_DENSE;
     }
+  }
+
+  async function getCenter() {
+    let res = await fetch("/api/center");
+    res = await res.json();
+    let centers = res.centers;
+    console.log("centers", res, centers);
+    return centers;
   }
 </script>

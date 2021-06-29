@@ -19,9 +19,17 @@ const fetchStatus = async () => {
   };
   try {
     let today = new Date();
+    let todayMinus6 = new Date();
+    todayMinus6.setDate(todayMinus6.getDate() - 6);
+
     let year = today.getFullYear(); // 년도
     let month = today.getMonth() + 1; // 월
     let date = today.getDate(); // 날짜
+
+    let year6 = todayMinus6.getFullYear(); // 년도
+    let month6 = todayMinus6.getMonth() + 1; // 월
+    let date6 = todayMinus6.getDate(); // 날짜
+
     function numberPad(n, width) {
       n = n + "";
       return n.length >= width
@@ -30,10 +38,11 @@ const fetchStatus = async () => {
     }
     month = numberPad(month, 2);
     date = numberPad(date, 2);
+    month6 = numberPad(month6, 2);
+    date6 = numberPad(date6, 2);
 
     let ymdtime = year + "-" + month + "-" + date + " 00:00:00";
-    let ymdMinus6 =
-      year + "-" + month + "-" + numberPad(parseInt(date) - 6, 2) + " 00:00:00";
+    let ymdMinus6 = year6 + "-" + month6 + "-" + date6 + " 00:00:00";
 
     var url =
       "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson";
@@ -49,12 +58,13 @@ const fetchStatus = async () => {
       "&" +
       encodeURIComponent("startCreateDt") +
       "=" +
-      encodeURIComponent(`${year}${month}${numberPad(parseInt(date) - 6, 2)}`);
+      encodeURIComponent(`${year6}${month6}${date6}`);
     queryParams +=
       "&" +
       encodeURIComponent("endCreateDt") +
       "=" +
       encodeURIComponent(`${year}${month}${date}`);
+    console.log(`${year6}${month6}${date6}`);
     let jejuOccur = [];
     let responseOccur = await axios.get(url + queryParams);
     responseOccur = responseOccur.data.response.body.items.item;

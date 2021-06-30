@@ -277,6 +277,7 @@ async function makeEntrantChart() {
             },
             afterDataLimits(scale) {
               scale.max = entrantChart.scales["y-axis-0"].max;
+              scale.min = entrantChart.scales["y-axis-0"].min;
             },
           },
         ],

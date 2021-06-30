@@ -61,6 +61,7 @@ async function getInstitution() {
   DATAS.Institution = data;
   return DATAS.Institution;
 }
+
 export default {
   getDense,
   getCenter,

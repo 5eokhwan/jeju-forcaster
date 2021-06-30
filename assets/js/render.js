@@ -109,7 +109,15 @@ function renderCenter(datas) {
 }
 
 function renderInstitution(datas) {
-  console.log(datas);
+  const baseTm = datas.currentHm;
+  datas = datas.datas;
+  const $filterUsableInstitution = document.querySelector(
+    "#filterUsableInstitution"
+  );
+  $filterUsableInstitution.insertAdjacentText(
+    "afterbegin",
+    "(기준: " + baseTm.substr(0, 2) + ":" + baseTm.substr(2, 2) + ")"
+  );
   const html = datas.map((data) => {
     const s = data.sttTm.substr(0, 2) + ":" + data.sttTm.substr(2, 2);
     const e = data.endTm.substr(0, 2) + ":" + data.endTm.substr(2, 2);

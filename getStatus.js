@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { getCurKrTime } = require("./getCurKrDate");
 
 const fetchStatus = async () => {
   const status = {
@@ -18,9 +19,8 @@ const fetchStatus = async () => {
     },
   };
   try {
-    let today = new Date();
-    let todayMinus6 = new Date();
-    todayMinus6.setDate(todayMinus6.getDate() - 6);
+    let today = getCurKrTime();
+    let todayMinus6 = getCurKrTime(6);
 
     let year = today.getFullYear(); // 년도
     let month = today.getMonth() + 1; // 월

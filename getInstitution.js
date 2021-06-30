@@ -1,5 +1,6 @@
 const axios = require("axios");
 const fs = require("fs");
+const { getCurKrTime } = require("./getCurKrDate");
 
 const dataBuffer = fs.readFileSync("assets/json/EntrustedInstitutionPos.json");
 const dataJSON = dataBuffer.toString();
@@ -22,7 +23,7 @@ const fetchInstitution = async () => {
         : new Array(width - n.length + 1).join("0") + n;
     }
     const fetchedData = await axios.get(url);
-    const date = new Date();
+    const date = getCurKrTime();
     let currentHm =
       `${numberPad(date.getHours(), 2)}` + numberPad(date.getMinutes(), 2);
     institution.currentHm = currentHm;
@@ -57,7 +58,7 @@ const fetchInstitution = async () => {
   } catch (e) {
     console.log("Institution-Err", e);
   } finally {
-    return institution.datas;
+    return institution;
   }
 };
 module.exports = fetchInstitution;

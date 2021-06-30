@@ -325,9 +325,11 @@ async function drawStatusChart() {
     document.getElementById(`${key}Increase`).innerText = increase;
     makeStatusChart(vaccine.baseDate, vaccine[key], key);
   }
-  document.getElementById("statusUpdateText").innerText = `update :${
-    occur.stdDay[len - 1]
-  }`; // | ${vaccine.baseDate[len - 1]}
+  let updateDate = occur.stdDay[len - 1];
+  updateDate = updateDate.substr(0, 14);
+  document.getElementById(
+    "statusUpdateText"
+  ).innerText = `Update :${updateDate}`; // | ${vaccine.baseDate[len - 1]}
 }
 function makeStatusChart(xs, ys, key) {
   console.log(xs, ys);

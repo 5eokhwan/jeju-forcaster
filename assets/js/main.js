@@ -84,7 +84,7 @@ let filterCheckListener = (e, el = null) => {
   if (el.dataset.filter === "institution") {
     if (el.checked) {
       $filterUsableInstitution.style.display = "";
-      $filterUsableInstitution.childNodes[1].checked = false;
+      $filterUsableInstitution.childNodes[2].checked = false;
     } else $filterUsableInstitution.style.display = "none";
   }
 };
@@ -98,7 +98,9 @@ filterCheckBoxes.forEach((box) =>
 async function drawFigure() {
   const dense_datas = await dataLoader.getDense();
   const center_datas = await dataLoader.getCenter();
-  const institution_datas = await dataLoader.getInstitution();
+  let institution_datas = await dataLoader.getInstitution();
+  institution_datas = institution_datas.datas;
+
   let dense_circles = [];
   let center_circles = [];
   let institution_circles = [];
@@ -140,11 +142,7 @@ async function drawFigure() {
         center: new naver.maps.LatLng(data.latitude, data.longitude),
         radius: 350,
         strokeColor: "green",
-        fillColor: data.possibleTm
-          ? "green"
-          : data.hldyYn !== "Y"
-          ? "gray"
-          : "black",
+        fillColor: data.possibleTm && data.hldyYn === "N" ? "green" : "gray",
         fillOpacity: 0.3,
         clickable: true,
         filter: "institution",

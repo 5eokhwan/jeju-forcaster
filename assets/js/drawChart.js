@@ -87,8 +87,16 @@ async function makeEntrantChart() {
   const data = await dataLoader.getEntrantData();
   const ctx = document.getElementById("entrantChart");
   const xs = data.entrant.xs.slice(7, data.entrant.xs.length);
+
   const entranceInfo = document.getElementById("entranceInfo");
-  entranceInfo.innerText = xs[0] + " - " + xs[xs.length - 1];
+  entranceInfo.innerText = xs[0] + " ~ " + xs[xs.length - 1];
+  const predictDate = document.getElementById("predictDate");
+  predictDate.innerText =
+    data.predictEntrant.xs[0] +
+    " ~ " +
+    data.predictEntrant.xs[data.predictEntrant.xs.length - 1];
+  const accuracyResult = document.getElementById("accuracy-result");
+  accuracyResult.innerText = data.predictEntrant.accuracy;
   const entrantChart = new Chart(ctx, {
     type: "line",
     data: {

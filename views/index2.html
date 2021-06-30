@@ -82,8 +82,10 @@
         >
           <div class="col-xl-10 col-lg-8">
             <h1>제주도 코로나 예방</h1>
-            <h1>prevent <span>+</span> predict</h1>
-            <h2>AI와 BigData 및 기후 데이터를 활용한 리얼 프리벤션 시스템</h2>
+            <h1>predict <span>+</span> prevent</h1>
+            <h2>
+              AI와 제주데이터허브 및 기후 데이터를 활용한 리얼 프리벤션 시스템
+            </h2>
           </div>
         </div>
 
@@ -570,13 +572,13 @@
           <div class="row g-2 mb-3" style="min-height: 700px">
             <div
               id="entrantDisplay"
-              class="col-lg-8 col-md-6 fs-4"
+              class="col-lg-9 col-md-6 fs-4"
               data-aos="zoom-in"
               data-aos-delay="100"
               style="height: 100px"
             >
               지난날의 입도객 수
-              <div id="entranceInfo" class="fs-5">-</div>
+              <div id="entranceInfo" class="fs-5" style="height: 110px">-</div>
               <div style="height: 500px; border-right: 1px #ebebeb solid">
                 <canvas id="entrantChart"></canvas>
               </div>
@@ -584,13 +586,37 @@
 
             <div
               id="predictEntrantDisplay"
-              class="col-lg-4 col-md-6 text-end fs-4"
+              class="col-lg-3 col-md-6 text-end fs-4"
               data-aos="zoom-in"
               data-aos-delay="200"
               style="height: 100px"
             >
               미래 입도객 예측
-              <div id="entrancePredictInfo" class="fs-5">횡보추세</div>
+              <div id="entrancePredictInfo" class="fs-5" style="height: 110px">
+                <div id="predictDate" class="fs-5">-</div>
+                <div id="AccuracyAlert">
+                  <span id="accuracy-text">지난 5일간 정확도: </span>
+                  <span id="accuracy-result">??%</span>
+                </div>
+                <div id="RiskAlert">
+                  <span id="safty-text">안전</span>
+                  <span data-risk="1" class="dense-risk-box"></span>
+                  <span data-risk="2" class="dense-risk-box"></span>
+                  <span data-risk="3" class="dense-risk-box"></span>
+                  <span data-risk="4" class="dense-risk-box"></span>
+                  <span data-risk="5" class="dense-risk-box"></span>
+                  <span
+                    data-risk="6"
+                    data-current="T"
+                    class="dense-risk-box"
+                  ></span>
+                  <span data-risk="7" class="dense-risk-box"></span>
+                  <span data-risk="8" class="dense-risk-box"></span>
+                  <span data-risk="9" class="dense-risk-box"></span>
+                  <span data-risk="10" class="dense-risk-box"></span>
+                  <span id="danger-text">위험</span>
+                </div>
+              </div>
               <div style="height: 500px">
                 <canvas id="predictEntrant"></canvas>
               </div>

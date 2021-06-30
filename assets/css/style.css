@@ -19,6 +19,25 @@ tr.denseInfo.active {
   color: white;
   border-color: #ffc451;
 }
+#RiskAlert {
+  height: 30px;
+  margin: 5px 0 0 0;
+}
+.dense-risk-box {
+  display: inline-block;
+  height: 70%;
+  width: 5px;
+  background-color: gray;
+}
+.dense-risk-box[data-current="T"] {
+  background-color: yellow;
+}
+#safty-text {
+  color: blue;
+}
+#danger-text {
+  color: red;
+}
 /*--------------------------------------------------------------
 # General
 

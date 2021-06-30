@@ -49,7 +49,8 @@ async function getEntrantData() {
       ys.push(come);
     });
     const count = theData.sum;
-    result[theData.name] = { xs, ys, count };
+    const accuracy = theData.accuracy;
+    result[theData.name] = { xs, ys, count, accuracy };
   }
   DATAS.EntrantData = result;
   return result;

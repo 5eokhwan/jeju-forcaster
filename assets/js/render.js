@@ -118,6 +118,19 @@ function renderInstitution(datas) {
     "afterbegin",
     "(기준: " + baseTm.substr(0, 2) + ":" + baseTm.substr(2, 2) + ")"
   );
+  function pytha(x1, y1, x2, y2) {
+    var width = Math.abs(x1 - x2),
+      height = Math.abs(y1 - y2),
+      lineLength = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
+
+    return lineLength;
+  }
+  //33.171397645356656, 126.15717468658364
+  datas = datas.sort(
+    (a, b) =>
+      pytha(33.1713976453, 126.157174686, a.latitude, a.longitude) -
+      pytha(33.1713976453, 126.157174686, b.latitude, b.longitude)
+  );
   const html = datas.map((data) => {
     const s = data.sttTm.substr(0, 2) + ":" + data.sttTm.substr(2, 2);
     const e = data.endTm.substr(0, 2) + ":" + data.endTm.substr(2, 2);

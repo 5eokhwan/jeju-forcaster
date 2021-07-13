@@ -11,7 +11,7 @@ async function getDense() {
   let res = await fetch("/api/dense");
   res = await res.json();
   DATAS.PopulationDense = res.datas;
-  console.log(DATAS.PopulationDense);
+  //console.log(DATAS.PopulationDense);
   return DATAS.PopulationDense;
 }
 

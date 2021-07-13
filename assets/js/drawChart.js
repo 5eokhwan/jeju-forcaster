@@ -8,7 +8,6 @@ async function makePieChart() {
     if (ctx.dataset.key === "sigungu")
       centerDatas.forEach((data) => showingData.push(data[ctx.dataset.key]));
     else denseDatas.forEach((data) => showingData.push(data[ctx.dataset.key]));
-    console.log(showingData);
     let obj = {};
     for (let x of showingData) {
       if (!obj.hasOwnProperty(x)) obj[x] = 1;
@@ -154,9 +153,7 @@ async function makeEntrantChart() {
               for (let i = 0; i < xLabels.length; i++) {
                 if (i >= 1 && i <= xLabels.length - 2) xLabels[i] = "";
                 else {
-                  console.log(xLabels[i]);
                 }
-                console.log(xLabels.length);
               }
             },
           },
@@ -314,13 +311,14 @@ async function drawStatusChart() {
   const statusData = await getStatusData();
   const occur = statusData.occur;
   const vaccine = statusData.vaccine;
-  //console.log(vaccine);
-  const len = occur["stdDay"].length;
+  const len_occur = occur["stdDay"].length;
+  const len_vaccine = vaccine["baseDate"].length;
 
   for (let key in occur) {
     if (key === "stdDay") continue;
-    document.getElementById(`${key}Result`).innerText = occur[key][len - 1];
-    let increase = occur[key][len - 1] - occur[key][len - 2];
+    document.getElementById(`${key}Result`).innerText =
+      occur[key][len_occur - 1];
+    let increase = occur[key][len_occur - 1] - occur[key][len_occur - 2];
     increase = increase > 0 ? "+" + increase : increase;
     document.getElementById(`${key}Increase`).innerText = increase;
 
@@ -328,21 +326,24 @@ async function drawStatusChart() {
   }
   for (let key in vaccine) {
     if (key === "baseDate") continue;
-    document.getElementById(`${key}Result`).innerText = vaccine[key][len - 1];
-    let increase = vaccine[key][len - 1] - vaccine[key][len - 2];
+    document.getElementById(`${key}Result`).innerText =
+      vaccine[key][len_vaccine - 1];
+    let increase =
+      vaccine[key][len_vaccine - 1] - vaccine[key][len_vaccine - 2];
     increase = increase > 0 ? "+" + increase : increase;
     document.getElementById(`${key}Increase`).innerText = increase;
     makeStatusChart(vaccine.baseDate, vaccine[key], key);
   }
-  let updateDate = occur.stdDay[len - 1];
+  let updateDate = occur.stdDay[len_occur - 1];
   updateDate = updateDate.substr(0, 14);
+  let vaccineUpdate = vaccine.baseDate[len_vaccine - 1]
+    .substr(0, 10)
+    .split("-");
   document.getElementById(
     "statusUpdateText"
-  ).innerText = `Update :${updateDate}`; // | ${vaccine.baseDate[len - 1]}
+  ).innerText = `발생 현황: ${updateDate} | 예방접종 현황: ${vaccineUpdate[0]}년 ${vaccineUpdate[1]}월 ${vaccineUpdate[2]}일`;
 }
 function makeStatusChart(xs, ys, key) {
-  console.log(xs, ys);
-
   const data = {
     labels: xs,
     datasets: [

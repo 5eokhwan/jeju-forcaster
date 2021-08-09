@@ -90,8 +90,7 @@
         </div>
 
         <div
-          class="row gy-4 mt-5 justify-content-center"
-          style="height: 220px"
+          class="row gy-4 mt-5 justify-content-center flex"
           data-aos="zoom-in"
           data-aos-delay="250"
         >
@@ -544,16 +543,6 @@
                       ></canvas>
                     </div>
                   </div>
-                  <!-- <div class="progress">
-                    <div
-                      class="progress-bar bg-info"
-                      role="progressbar"
-                      style="width: 25%"
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -569,18 +558,17 @@
             <p>Entrant</p>
           </div>
 
-          <div class="row g-2 mb-3" style="min-height: 700px">
+          <div class="row g-2 mb-3">
             <div
               id="entrantDisplay"
               class="col-lg-9 col-md-6 fs-4"
               data-aos="zoom-in"
               data-aos-delay="100"
-              style="height: 100px"
             >
               지난날의 입도객 수
               <div id="entranceInfo" class="fs-5" style="height: 110px">-</div>
               <div style="height: 500px; border-right: 1px #ebebeb solid">
-                <canvas id="entrantChart"></canvas>
+                <canvas id="entrantChart" style="height: 500px"></canvas>
               </div>
             </div>
 
@@ -589,7 +577,6 @@
               class="col-lg-3 col-md-6 text-end fs-4"
               data-aos="zoom-in"
               data-aos-delay="200"
-              style="height: 100px"
             >
               미래 입도객 예측
               <div id="entrancePredictInfo" class="fs-5" style="height: 110px">
@@ -618,7 +605,7 @@
                 </div>
               </div>
               <div style="height: 500px">
-                <canvas id="predictEntrant"></canvas>
+                <canvas id="predictEntrant" style="height: 500px"></canvas>
               </div>
             </div>
           </div>
@@ -628,21 +615,21 @@
       <!-- ======= Contact Section ======= -->
       <section id="Map" class="Map">
         <div class="container-fluid" data-aos="fade-up">
-          <div class="section-title d-inline-block">
+          <div class="section-title d-inline-block" style="width: 9%">
             <h2>지도</h2>
             <p>MAP</p>
           </div>
-          <span id="mapController" class="ml-2">
-            <div
-              class="
-                form-check form-switch
-                ml-3
-                px-3
-                d-inline-block
-                border-right
-              "
-              style="border-right: 1px solid #e3e6f0"
-            >
+          <span
+            id="mapController"
+            class="
+              d-lg-inline-flex
+              justify-content-between
+              d-sm-flex
+              flex-lg-row flex-sm-column
+            "
+            style="width: 90%"
+          >
+            <div class="form-check form-switch ml-3 d-inline-block">
               <input
                 type="checkbox"
                 class="form-check-input"
@@ -651,17 +638,17 @@
               <label class="custom-control-label" for="mapInterectionBtn"
                 >지도 조작</label
               >
+              <div class="px-3 d-inline-block">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary d-inline-block btn-sm"
+                  id="centerBtn"
+                >
+                  원위치
+                </button>
+              </div>
             </div>
-            <div class="px-3 d-inline-block">
-              <button
-                type="button"
-                class="btn btn-outline-secondary d-inline-block btn-sm"
-                id="centerBtn"
-              >
-                원위치
-              </button>
-            </div>
-            <div class="float-end d-flex justify-content-center">
+            <div>
               <ul id="map-flters">
                 <li data-filter="all" class="filterBtn filter-active">비율</li>
                 <li data-filter="dense" class="filterBtn">
@@ -694,10 +681,7 @@
                     checked
                   />
                 </li>
-                <div
-                  id="filterUsableInstitution"
-                  style="position: absolute; top: 50px; display: none"
-                >
+                <div id="filterUsableInstitution">
                   영업중인 위탁 의료 기관만 지도에 표시<input
                     class="form-check-input mt-1 ms-1"
                     type="checkbox"

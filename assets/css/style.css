@@ -702,15 +702,8 @@ section {
 }
 
 .services .icon-box .icon {
-  margin: 0 auto;
-  width: 64px;
-  height: 64px;
   background: #ffc451;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
   transition: 0.3s;
 }
 
